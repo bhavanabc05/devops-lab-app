@@ -4,6 +4,10 @@ FROM node:18-alpine
 # Set working directory
 WORKDIR /app
 
+# Install Curl
+RUN apk add --no-cache curl
+
+
 # Copy package files and install dependencies
 COPY package*.json ./
 RUN npm install --production
