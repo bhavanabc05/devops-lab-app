@@ -1,9 +1,22 @@
-FROM ubuntu:22.04
+# Use Node.js 18 Alpine (lightweight)
+FROM node:18-alpine
 
+# Set working directory
 WORKDIR /app
 
-COPY build.sh .
+# Copy package files and install dependencies
+COPY package*.json ./
+RUN npm install --production
 
-RUN chmod +x build.sh
+# Copy application code
+COPY . .
 
-CMD ["./build.sh"]
+# Expose port 3000
+EXPOSE 3000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s \
+  CMD wget -q -O- http://localhost:3000/health || exit 1
+
+# Start the app
+CMD ["node", "app.js"]
