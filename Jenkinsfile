@@ -93,7 +93,7 @@ pipeline {
         sh """
           echo "Waiting 5s for app to start..."
           sleep 5
-          curl -f http://localhost:${APP_PORT}/health \
+          docker exec ${CONTAINER_NAME} curl -f http://localhost:3000/health \
             && echo "✅ App is healthy!" \
             || (echo "❌ Health check failed!" && exit 1)
         """
