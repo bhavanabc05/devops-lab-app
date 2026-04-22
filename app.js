@@ -17,7 +17,7 @@ app.get('/health', (req, res) => {
 
 
 if (require.main === module) {
-  app.listen(3000, () => {
+  app.listen(3000,'0.0.0.0' () => {
     console.log("App running on port 3000");
   });
 }
