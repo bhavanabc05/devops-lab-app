@@ -70,11 +70,11 @@ pipeline {
     stage('🚀 Deploy') {
       steps {
         sh """
-          // Stop & remove old container if it exists
+          # Stop & remove old container if it exists
           docker stop ${CONTAINER_NAME} || true
           docker rm   ${CONTAINER_NAME} || true
 
-          // Run new container
+          # Run new container
           docker run -d \
             --name ${CONTAINER_NAME} \
             -p ${APP_PORT}:3000 \
